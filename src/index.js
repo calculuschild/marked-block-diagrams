@@ -1,4 +1,5 @@
-export default function() {options = {langs: ['blockDiagram']}) {
+export default function() {
+  const LANGS = ['blockDiagram'];
 	return {
     hooks: {
       processAllTokens(tokens) {
@@ -11,7 +12,7 @@ export default function() {options = {langs: ['blockDiagram']}) {
 				name  : 'blockDiagrams',
 				level : 'block',
 				renderer(token) {
-          <p>Blank for now</p>
+          return `<p>Blank for now</p>`
         };
       }
     ]
@@ -19,7 +20,7 @@ export default function() {options = {langs: ['blockDiagram']}) {
 
   function transformTokens(tokens) {
     for (const token of tokens) {
-      if(token.type !== 'code' || !langs.includes(token.lang)) continue;
+      if(token.type !== 'code' || !LANGS.includes(token.lang)) continue;
 
       const [labelText = '', diagramText = ''] = token.text.split(/\n\s*\n/, 2);
 
