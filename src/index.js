@@ -7,15 +7,13 @@ export default function() {
         return tokens;
       }
     },
-		extensions : [
-			{
-				name  : 'blockDiagrams',
-				level : 'block',
-				renderer(token) {
-          return `<p>Blank for now</p>`
-        };
+		extensions : [{
+      name  : 'blockDiagrams',
+      level : 'block',
+      renderer(token) {
+        return `<p>Blank for now</p>`
       }
-    ]
+    }]
   };
 
   function transformTokens(tokens) {
