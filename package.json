@@ -34,7 +34,7 @@
     "marked": ">=3 <18"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.6",
+    "@babel/core": "^8.0.7",
     "@babel/preset-env": "^7.26.0",
     "@markedjs/testutils": "17.0.1-2",
     "@rollup/plugin-commonjs": "^29.0.0",
