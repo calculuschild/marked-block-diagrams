@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Aligned Text Center Aligned 1`] = `"<p align="Center">Hello</p>"`;
+
+exports[`Aligned Text Center Alignment can be used in the preceding line 1`] = `"<p align="Center">Hello</p>"`;
+
+exports[`Aligned Text Center Alignment does not trigger mid-line 1`] = `
+"<p>Start of line :-: Hello</p>
+"
+`;
+
+exports[`Aligned Text Center Alignment supports multiple hyphens 1`] = `"<p align="Center">Hello</p>"`;
+
+exports[`Aligned Text Does not override simple 1-column 1-row tables 1`] = `
+"<table>
+<thead>
+<tr>
+<th align="center">Header</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Cell</td>
+</tr>
+</tbody></table>
+"
+`;
+
+exports[`Aligned Text Ends after a blank line 1`] = `
+"<p align="Center">Line 1
+Line 2
+Line3
+</p><p>Not centered</p>
+"
+`;
+
+exports[`Aligned Text Ignored inside a code block 1`] = `
+"<pre><code>
+:- Hello
+</code></pre>
+"
+`;
+
+exports[`Aligned Text Is not valid if missing at least one space or newline after the marker 1`] = `
+"<p>:-:Hello</p>
+"
+`;
+
+exports[`Aligned Text Left Aligned 1`] = `"<p align="Left">Hello</p>"`;
+
+exports[`Aligned Text Left Alignment can be used in the preceding line 1`] = `"<p align="Left">Hello</p>"`;
+
+exports[`Aligned Text Left Alignment does not trigger mid-line 1`] = `
+"<p>Start of line :- Hello</p>
+"
+`;
+
+exports[`Aligned Text Left Alignment supports multiple hyphens 1`] = `"<p align="Left">Hello</p>"`;
+
+exports[`Aligned Text Right Aligned 1`] = `"<p align="Right">Hello</p>"`;
+
+exports[`Aligned Text Right Alignment can be used in the preceding line 1`] = `"<p align="Right">Hello</p>"`;
+
+exports[`Aligned Text Right Alignment does not trigger mid-line 1`] = `
+"<p>Start of line -: Hello</p>
+"
+`;
+
+exports[`Aligned Text Right Alignment supports multiple hyphens 1`] = `"<p align="Right">Hello</p>"`;
