@@ -8,7 +8,7 @@ export default function() {
       }
     },
 		extensions : [{
-      name  : 'blockDiagrams',
+      name  : 'blockDiagram',
       level : 'block',
       renderer(token) {
         return `<p>Blank for now</p>`
@@ -16,6 +16,47 @@ export default function() {
     }]
   };
 
+  const blockRegex = /(\[(\s*[^\]]+)\]/y;
+  const connectorRegex = /((?:-+|   {3,})\|?)/y;
+
+  function parseRow(row, line) {
+    let position = 0;
+
+    row    = row;
+    column = 0;
+
+    while(position < line.length) {
+      blockRegex.lastIndex = position;
+      const block = blockRegex.exec(line);
+
+      if(block) {
+        blocks.push({
+            raw: block[0],
+            id : block[1].trim(),
+            row : row,
+            column : column,
+        });
+      }
+
+      column += 1;
+
+      position = blockRegex.lastIndex;
+      connectorRegex.lastIndex = position;
+      const connector = connectorRegex.exec(line);
+
+      if(connector) {
+        connectors.push({
+            raw: block[0],
+            id : block[1].trim(),
+            row : row,
+            column : column,
+        });
+      };
+    }
+
+  blocks = [];
+  connectors = [];
+  
   function transformTokens(tokens) {
     for (const token of tokens) {
       if(token.type !== 'code' || !LANGS.includes(token.lang)) continue;
@@ -25,12 +66,17 @@ export default function() {
       // Create map of text labels and contents
       const labels = {};
 
-      for(const line of labelText.split('\n')) {
-        const match = /&([^:\s]+)\s*:\s*(.*)$/.exec(line);
+      for(const [row, line] of labelText.split('\n').entries()) {
+        // Fetch all definitions
+        const blockMatch = /^([^:\s]+)\s*:\s*(.*)$/.exec(line);
 
-        if(match) {
+        if(blockMatch) {
           labels[match[1]] = match[2];
         }
+      }
+
+      for(const line of diagramText.split('\n')) {
+        parseRow(row, line);
       }
 
       Object.assign(token, {
