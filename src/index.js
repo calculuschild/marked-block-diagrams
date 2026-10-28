@@ -16,14 +16,14 @@ export default function() {
     }]
   };
 
-  const blockRegex = /(\[(\s*[^\]]+)\]/y;
-  const connectorRegex = /((?:-+|   {3,})\|?)/y;
+  const blockRegex = /\[(\s*[^\]]+)\]/y;
+  const connectorRegex = /((?:-+| {3,})\|?)/y;
 
   function parseRow(row, line) {
     let position = 0;
 
-    row    = row;
-    column = 0;
+    let row    = row;
+    let column = 0;
 
     while(position < line.length) {
       blockRegex.lastIndex = position;
@@ -46,16 +46,15 @@ export default function() {
 
       if(connector) {
         connectors.push({
-            raw: block[0],
-            id : block[1].trim(),
+            raw: connector[0],
             row : row,
             column : column,
         });
       };
     }
 
-  blocks = [];
-  connectors = [];
+  const blocks = [];
+  const connectors = [];
   
   function transformTokens(tokens) {
     for (const token of tokens) {
@@ -71,11 +70,11 @@ export default function() {
         const blockMatch = /^([^:\s]+)\s*:\s*(.*)$/.exec(line);
 
         if(blockMatch) {
-          labels[match[1]] = match[2];
+          labels[blockMatch[1]] = blockMatch[2];
         }
       }
 
-      for(const line of diagramText.split('\n')) {
+      for(const [row, line] of diagramText.split('\n').entries()) {
         parseRow(row, line);
       }
 
